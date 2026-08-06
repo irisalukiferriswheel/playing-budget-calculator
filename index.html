@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Plan and track a weekly playing budget." />
+  <title>Playing Budget Calculator</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="page-shell">
+    <section class="calculator-card" aria-labelledby="calculator-title">
+      <div class="top-bar">
+        <p class="eyebrow">Playing for Good</p>
+        <div class="language-toggle" role="group" aria-label="Language">
+          <button type="button" class="language-button active" data-language="en">English</button>
+          <button type="button" class="language-button" data-language="fr">Français</button>
+        </div>
+      </div>
+
+      <header>
+        <h1 id="calculator-title" data-i18n="title">Playing Budget Calculator</h1>
+        <p class="intro" data-i18n="intro">Choose how much of your weekly pay you want to reserve for playing, divide it across your planned games, and track what remains.</p>
+      </header>
+
+      <form id="budget-form" novalidate>
+        <div class="field">
+          <label for="weekly-pay" data-i18n="weeklyPayLabel">Weekly pay</label>
+          <div class="money-input">
+            <span aria-hidden="true">$</span>
+            <input id="weekly-pay" name="weeklyPay" type="number" min="0" step="0.01" inputmode="decimal" placeholder="800.00" required />
+          </div>
+          <small data-i18n="weeklyPayHelp">Enter your weekly take-home pay.</small>
+        </div>
+
+        <div class="field">
+          <div class="label-row">
+            <label for="budget-percent" data-i18n="percentageLabel">Percentage reserved for playing</label>
+            <output id="budget-percent-output" for="budget-percent">4%</output>
+          </div>
+          <input id="budget-percent" name="budgetPercent" type="range" min="1" max="15" step="1" value="4" />
+          <div class="range-scale" aria-hidden="true"><span>1%</span><span>15%</span></div>
+          <small data-i18n="percentageHelp">The recommended amount is 4% of weekly pay.</small>
+        </div>
+
+        <div class="field">
+          <label for="planned-games" data-i18n="plannedGamesLabel">Number of games planned this week</label>
+          <input id="planned-games" name="plannedGames" type="number" min="1" max="100" step="1" inputmode="numeric" placeholder="5" required />
+          <small data-i18n="plannedGamesHelp">Your weekly playing budget will be divided equally across these games.</small>
+        </div>
+
+        <div class="field">
+          <label for="games-played" data-i18n="gamesPlayedLabel">Games already played this week</label>
+          <input id="games-played" name="gamesPlayed" type="number" min="0" max="100" step="1" value="0" inputmode="numeric" required />
+          <small data-i18n="gamesPlayedHelp">Update this number after each game to track your remaining budget.</small>
+        </div>
+
+        <button type="submit" class="calculate-button" data-i18n="calculateButton">Calculate my playing budget</button>
+        <p id="form-error" class="error" role="alert" hidden></p>
+      </form>
+
+      <section id="results" class="results" aria-live="polite" hidden>
+        <div class="result featured">
+          <span data-i18n="weeklyBudgetResult">Weekly playing budget</span>
+          <strong id="playing-budget">$0.00</strong>
+          <small id="playing-budget-detail"></small>
+        </div>
+
+        <div class="result-grid">
+          <div class="result">
+            <span data-i18n="perGameResult">Recommended amount per game</span>
+            <strong id="per-game-budget">$0.00</strong>
+            <small data-i18n="perGameDetail">Equal share of the weekly playing budget</small>
+          </div>
+          <div class="result">
+            <span data-i18n="gamesRemainingResult">Games remaining</span>
+            <strong id="games-remaining">0</strong>
+            <small id="games-progress-detail"></small>
+          </div>
+        </div>
+
+        <div class="result-grid">
+          <div class="result">
+            <span data-i18n="usedBudgetResult">Budget used so far</span>
+            <strong id="budget-used">$0.00</strong>
+            <small id="budget-used-detail"></small>
+          </div>
+          <div class="result remaining">
+            <span data-i18n="remainingBudgetResult">Playing budget remaining</span>
+            <strong id="budget-remaining">$0.00</strong>
+            <small id="remaining-detail"></small>
+          </div>
+        </div>
+
+        <div class="progress-block">
+          <div class="progress-label">
+            <span data-i18n="progressLabel">Weekly budget progress</span>
+            <strong id="progress-percent">0%</strong>
+          </div>
+          <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div id="progress-fill" class="progress-fill"></div>
+          </div>
+        </div>
+        <div id="status-message" class="status" role="status"></div>
+      </section>
+
+      <footer>
+        <p data-i18n="disclaimer">This calculator is a budgeting guide. Do not use money needed for housing, food, bills, debt payments, or other essentials.</p>
+      </footer>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
