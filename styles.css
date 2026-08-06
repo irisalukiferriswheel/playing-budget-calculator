@@ -1,0 +1,173 @@
+* { box-sizing: border-box; }
+
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #14213d;
+  background: #f4f7fb;
+  font-synthesis: none;
+}
+
+body { margin: 0; min-width: 320px; }
+button, input { font: inherit; }
+
+.page-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.calculator-card {
+  width: min(100%, 760px);
+  background: #fff;
+  border: 1px solid #dce4ef;
+  border-radius: 22px;
+  padding: clamp(22px, 5vw, 42px);
+  box-shadow: 0 18px 50px rgba(20, 33, 61, 0.1);
+}
+
+.top-bar, .label-row, .progress-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.language-toggle {
+  display: inline-flex;
+  padding: 4px;
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  background: #f8fafc;
+}
+
+.language-button {
+  border: 0;
+  border-radius: 999px;
+  padding: 8px 12px;
+  color: #445168;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 750;
+}
+
+.language-button.active { color: #fff; background: #174ea6; }
+
+h1 {
+  margin: 22px 0 0;
+  font-size: clamp(1.8rem, 5vw, 2.7rem);
+  line-height: 1.08;
+}
+
+.intro { margin: 14px 0 28px; color: #52627a; line-height: 1.6; }
+form { display: grid; gap: 21px; }
+.field { display: grid; gap: 8px; }
+label { font-weight: 750; }
+
+input[type="number"] {
+  width: 100%;
+  min-height: 50px;
+  border: 1px solid #b8c5d6;
+  border-radius: 12px;
+  padding: 11px 14px;
+  color: inherit;
+  background: #fff;
+}
+
+input:focus { outline: 3px solid rgba(26, 102, 255, .18); border-color: #1a66ff; }
+input[type="range"] { width: 100%; accent-color: #174ea6; cursor: pointer; }
+.money-input { position: relative; }
+.money-input span { position: absolute; top: 50%; left: 14px; transform: translateY(-50%); font-weight: 700; }
+.money-input input { padding-left: 32px; }
+.range-scale { display: flex; justify-content: space-between; color: #758196; font-size: .8rem; }
+
+output {
+  min-width: 50px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  text-align: center;
+  font-weight: 850;
+  color: #174ea6;
+  background: #eef4ff;
+}
+
+small { color: #64748b; line-height: 1.4; }
+
+.calculate-button {
+  min-height: 52px;
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-weight: 800;
+  color: #fff;
+  background: #174ea6;
+  cursor: pointer;
+}
+
+.calculate-button:hover { filter: brightness(1.08); }
+button:focus-visible { outline: 3px solid rgba(26, 102, 255, .35); outline-offset: 3px; }
+.error { margin: 0; color: #a61b1b; font-weight: 700; }
+
+.results {
+  display: grid;
+  gap: 14px;
+  margin-top: 30px;
+  padding-top: 28px;
+  border-top: 1px solid #dce4ef;
+}
+
+.result-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+
+.result {
+  display: grid;
+  gap: 5px;
+  padding: 18px;
+  border: 1px solid #dce4ef;
+  border-radius: 15px;
+  background: #f8fafc;
+}
+
+.result.featured { background: #eef4ff; border-color: #bfd2fb; }
+.result.remaining { background: #edf8ef; border-color: #bde1c7; }
+.result span { font-size: .9rem; color: #52627a; }
+.result strong { font-size: clamp(1.35rem, 4vw, 1.9rem); }
+
+.progress-block {
+  display: grid;
+  gap: 10px;
+  padding: 18px;
+  border: 1px solid #dce4ef;
+  border-radius: 15px;
+}
+
+.progress-track { height: 14px; overflow: hidden; border-radius: 999px; background: #e2e8f0; }
+.progress-fill { width: 0; height: 100%; border-radius: inherit; background: #174ea6; transition: width 240ms ease; }
+
+.status {
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: #edf8ef;
+  color: #1f6033;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.status.warning { background: #fff6e5; color: #805300; }
+.status.danger { background: #fdecec; color: #991b1b; }
+footer { margin-top: 22px; font-size: .85rem; color: #6b778c; line-height: 1.5; }
+footer p { margin-bottom: 0; }
+
+@media (max-width: 600px) {
+  .page-shell { padding: 12px; }
+  .calculator-card { border-radius: 16px; }
+  .top-bar { align-items: flex-start; flex-direction: column; }
+  .result-grid { grid-template-columns: 1fr; }
+}
