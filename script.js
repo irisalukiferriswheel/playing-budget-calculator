@@ -160,7 +160,7 @@ percentageInput.addEventListener("input", () => {
 });
 
 document.querySelectorAll(".language-button").forEach((button) => {
-  button.addEventListener("click", () => applyLanguage(button.dataset.language));
+  button.addEventListener("click", () => chooseSiteLanguage(button.dataset.language));
 });
 
 form.addEventListener("submit", (event) => {
@@ -169,3 +169,13 @@ form.addEventListener("submit", (event) => {
 });
 
 applyLanguage("en");
+
+// Language-only bridge; existing form and calculation state stays in place.
+let siteLanguageController;
+function chooseSiteLanguage(code) {
+  if(siteLanguageController) siteLanguageController.choose(code);
+  else applyLanguage(code);
+}
+import('./jpdbLocalization.js').then(({createLanguageController})=>{
+  siteLanguageController=createLanguageController(window,applyLanguage,null);
+});
